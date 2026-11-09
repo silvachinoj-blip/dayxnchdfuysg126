@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff8f1">
+  <meta name="description" content="Una carta digital de cumpleaños hecha con mucho amor.">
+  <title>Te amo mi amor · Feliz cumpleaños</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Patrick+Hand&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="is-intro">
+  <noscript><style>.intro,.confetti{display:none}body.is-intro .presentation-nav{visibility:visible}</style></noscript>
+  <div class="gate" id="gate" hidden role="region" aria-label="Cuenta regresiva">
+    <div class="gate-inner">
+      <p class="tiny-kicker">falta poquito para tu sorpresa</p>
+      <h1 class="hand-title gate-title">Cuenta regresiva ♥</h1>
+      <div class="gate-clock" role="timer" aria-label="Tiempo que falta">
+        <div><b id="cdDays">0</b><span>días</span></div>
+        <div><b id="cdHours">00</b><span>horas</span></div>
+        <div><b id="cdMins">00</b><span>minutos</span></div>
+        <div><b id="cdSecs">00</b><span>segundos</span></div>
+      </div>
+      <p class="gate-note" id="gateNote" aria-live="polite"></p>
+      <div class="gate-tabs" id="gateTabs" hidden role="group" aria-label="Sorpresas de cada día"></div>
+      <div class="gate-cards" id="gateCards"></div>
+    </div>
+  </div>
+  <div class="intro" id="intro" role="dialog" aria-modal="true" aria-label="Pantalla de bienvenida">
+    <div class="intro-stage" id="stageLock">
+      <p class="tiny-kicker">una sorpresa te espera</p>
+      <button class="padlock" id="padlock" type="button" aria-label="Candado: tócalo varias veces para abrirlo">
+        <span class="tap-ring" aria-hidden="true"></span>
+        <svg class="padlock-svg" viewBox="0 0 160 200" aria-hidden="true">
+          <defs>
+            <linearGradient id="lockBody" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f08a92"/><stop offset="1" stop-color="#d4525f"/></linearGradient>
+            <linearGradient id="lockMetal" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e9c3b8"/><stop offset=".5" stop-color="#fbe9e0"/><stop offset="1" stop-color="#d9a79f"/></linearGradient>
+          </defs>
+          <g class="shackle">
+            <path d="M44 94V58a36 36 0 0 1 72 0v36" fill="none" stroke="#b98b86" stroke-width="16" stroke-linecap="round"/>
+            <path d="M44 94V58a36 36 0 0 1 72 0v36" fill="none" stroke="url(#lockMetal)" stroke-width="10" stroke-linecap="round"/>
+          </g>
+          <rect x="18" y="88" width="124" height="98" rx="20" fill="url(#lockBody)" stroke="#a93246" stroke-width="3"/>
+          <rect x="27" y="97" width="106" height="80" rx="14" fill="none" stroke="rgba(255,244,236,.7)" stroke-width="2" stroke-dasharray="5 5"/>
+          <path d="M80 152C62 140 56 128 60 120C64 112 76 113 80 124C84 113 96 112 100 120C104 128 98 140 80 152Z" fill="#fff3e9"/>
+          <circle cx="80" cy="130" r="4.5" fill="#b23a4c"/><rect x="78" y="131" width="4" height="13" rx="2" fill="#b23a4c"/>
+        </svg>
+      </button>
+      <div class="lock-hearts" id="lockHearts" aria-hidden="true"></div>
+      <p class="intro-hint" id="lockHint" aria-live="polite">Toca el candado para abrirlo</p>
+    </div>
+    <div class="intro-stage is-hidden" id="stageCount">
+      <p class="tiny-kicker" id="countKicker">contando tus años…</p>
+      <div class="age-badge" id="ageBadge">
+        <span class="age-number" id="ageNumber" aria-hidden="true">1</span>
+        <span class="plus-one" id="plusOne" aria-hidden="true">+1</span>
+      </div>
+      <p class="age-caption" id="ageCaption" aria-live="polite"></p>
+    </div>
+  </div>
+  <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+  <div class="paper-grain" aria-hidden="true"></div>
+  <main class="presentation" id="presentation" aria-label="Carta de cumpleaños interactiva">
+
+    <!-- PANTALLA 1: PORTADA -->
+    <section class="slide is-active" id="slide-1" data-slide="0" aria-hidden="false">
+      <div class="slide-frame cover-frame">
+        <div class="top-stitch" aria-hidden="true"></div>
+        <div class="cover-content">
+          <p class="tiny-kicker reveal" data-reveal data-reveal-order="1">una sorpresa hecha con amor</p>
+          <h1 class="hand-title cover-title reveal" data-reveal data-reveal-order="2" id="coverTitle">Te amo mi amor!!!</h1>
+          <div class="cover-snoopy reveal" data-reveal data-reveal-order="3">
+            <span class="orbit-heart orbit-heart-one" aria-hidden="true">♥</span>
+            <span class="orbit-heart orbit-heart-two" aria-hidden="true">♥</span>
+            <img class="snoopy-heart-img" src="https://pngimg.com/uploads/snoopy/snoopy_PNG24.png" alt="Snoopy abrazando un gran corazón rojo" onerror="this.onerror=null;this.src='https://assets.stickpng.com/images/5853c4adec0c270fc2f62df9.png'">
+          </div>
+          <p class="cover-subtitle reveal" data-reveal data-reveal-order="6" id="coverSubtitle">Este sitio web es solo para ti</p>
+          <p class="cover-note reveal" data-reveal data-reveal-order="7">Hecho especialmente para recordarte lo mucho que te quiero.</p>
+        </div>
+
+        <div class="balloon-bunch balloon-left reveal" data-reveal data-reveal-order="4" aria-hidden="true">
+          <span class="balloon b-pink"></span><span class="balloon b-rose"></span><span class="balloon b-light"></span>
+          <span class="balloon-string"></span>
+        </div>
+        <div class="balloon-bunch balloon-right reveal" data-reveal data-reveal-order="5" aria-hidden="true">
+          <span class="balloon b-rose"></span><span class="balloon b-light"></span><span class="balloon b-pink"></span>
+          <span class="balloon-string"></span>
+        </div>
+        <div class="cover-sparkles" aria-hidden="true"><i>♥</i><i>♥</i><i>✿</i><i>♥</i><i>✿</i></div>
+      </div>
+    </section>
+
+    <!-- PANTALLA 2: CANCIÓN -->
+    <section class="slide" id="slide-2" data-slide="1" aria-hidden="true" hidden>
+      <div class="slide-frame song-frame">
+        <div class="song-heading reveal" data-reveal data-reveal-order="0">
+          <img src="https://assets.stickpng.com/images/5853c4adec0c270fc2f62df9.png" alt="Snoopy y Woodstock" class="heading-snoopy heading-left reveal" data-reveal="left" data-reveal-order="1">
+          <div>
+            <p class="tiny-kicker">una canción que me recuerda a ti</p>
+            <h2 class="hand-title">Te dedico esta canción</h2>
+          </div>
+          <img src="https://assets.stickpng.com/images/5853c464ec0c270fc2f62df5.png" alt="Charlie Brown junto a Snoopy" class="heading-snoopy heading-right reveal" data-reveal="right" data-reveal-order="2">
+        </div>
+
+        <div class="song-grid">
+          <div class="media-card reveal" data-reveal data-reveal-order="3">
+            <div class="media-card-top"><span class="media-dot"></span><span class="media-dot"></span><span class="media-dot"></span><span class="media-label">Nuestra canción ♡</span></div>
+            <div class="song-player" id="songPlayer">
+              <div class="sp-notes" aria-hidden="true"><span>♪</span><span>♫</span><span>♥</span><span>♪</span></div>
+              <div class="sp-photo"><img id="spCover" alt="Foto de portada"><span class="sp-fallback" aria-hidden="true">♫</span></div>
+              <div class="sp-info"><h3 id="spTitle"></h3><p id="spArtist"></p></div>
+              <div class="sp-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="sp-seek"><input type="range" id="spBar" min="0" max="1000" value="0" aria-label="Progreso de la canción"><span class="sp-time" id="spTime">0:00 / 0:00</span></div>
+              <div class="sp-controls">
+                <button type="button" class="sp-play" id="spPlay" aria-label="Reproducir"><svg class="ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg><svg class="ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg></button>
+                <div class="sp-vol"><button type="button" id="spMute" aria-label="Silenciar"><svg class="ic-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="ic-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><input type="range" id="spVol" min="0" max="100" value="80" aria-label="Volumen"></div>
+              </div>
+              <p class="sp-msg" id="spMsg"></p>
+              <audio id="songAudio" preload="metadata"></audio>
+            </div>
+          </div>
+
+          <article class="song-dedication reveal" data-reveal data-reveal-order="4">
+            <span class="dedication-heart" aria-hidden="true">♥</span>
+            <h3>Para ti, mi amor</h3>
+            <p id="songDedication">Quiero dedicarte esta canción porque, de alguna manera, cada nota me recuerda a ti. Gracias por llenar mis días de alegría y por hacer que hasta los momentos más sencillos se vuelvan especiales.</p>
+            <p class="signature">Con todo mi cariño ♡</p>
+            <img class="dedication-snoopy reveal" data-reveal="scale" data-reveal-order="5" src="https://assets.stickpng.com/images/5853c4adec0c270fc2f62df9.png" alt="Snoopy acompañado de Woodstock">
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA 3: PERSONAJES / REGALOS -->
+    <section class="slide" id="slide-3" data-slide="2" aria-hidden="true" hidden>
+      <div class="slide-frame gifts-frame">
+        <div class="gifts-header reveal" data-reveal>
+          <p class="tiny-kicker">pequeños detalles para alguien enorme</p>
+          <h2 class="hand-title">Regalos para ti</h2>
+          <span class="header-heart" aria-hidden="true">♥</span>
+        </div>
+        <div class="character-row" aria-label="Regalos para abrir">
+          <button class="character-card reveal" data-reveal type="button" data-gift="poem" aria-label="Snoopy: abrir un poema">
+            <img class="gift-img" data-art="snoopy" src="https://files.coloringpark.com/snoopy-coloring-pages/snoopy-with-a-birthday-cake-coloring-page-800.webp" alt="Snoopy con un pastel de cumpleaños">
+            <span class="gift-label">Un poema</span>
+          </button>
+          <button class="character-card reveal" data-reveal type="button" data-gift="music" aria-label="Woodstock: escuchar Cumpleaños feliz"><span class="gift-art" data-art="woodstock"></span><span class="gift-label">Una canción</span></button>
+          <button class="character-card reveal" data-reveal type="button" data-gift="letter" aria-label="Regalo: abrir una carta"><span class="gift-art" data-art="gift"></span><span class="gift-label">Una carta</span></button>
+          <button class="character-card reveal" data-reveal type="button" data-gift="balloons" aria-label="Globo: soltar globos con mensajes"><span class="gift-art" data-art="balloon"></span><span class="gift-label">Globos</span></button>
+          <button class="character-card reveal" data-reveal type="button" data-gift="fireworks" aria-label="Corazón: ver fuegos artificiales"><span class="gift-art" data-art="heart"></span><span class="gift-label">Una sorpresa</span></button>
+        </div>
+        <div class="gift-caption reveal" data-reveal>
+          <span class="caption-line"></span>
+          <p>Ojalá pudiera envolverte todo el amor que siento y ponerlo bajo un moñito.</p>
+          <span class="caption-line"></span>
+        </div>
+        <p class="continue-hint reveal" data-reveal>Toca cada regalo para abrirlo ♡</p>
+      </div>
+    </section>
+
+    <!-- PANTALLA 4: GALERÍA -->
+    <section class="slide" id="slide-4" data-slide="3" aria-hidden="true" hidden>
+      <div class="slide-frame memories-frame">
+        <div class="memories-heading reveal" data-reveal>
+          <p class="tiny-kicker">momentos que guardo con cariño</p>
+          <h2 class="hand-title">Nuestra galería de recuerdos</h2>
+          <p class="soft-subtitle">Cada recuerdo contigo merece un lugar bonito.</p>
+        </div>
+        <div class="photo-wall" id="photoWall" aria-label="Fotografías de recuerdos">
+          <!-- Las fotografías se generan desde CONFIG.photos en script.js -->
+        </div>
+        <div class="memory-footer reveal" data-reveal>Y todavía nos quedan muchísimos recuerdos por crear… <span>♥</span></div>
+      </div>
+    </section>
+
+    <!-- PANTALLA 5: FLORES -->
+    <section class="slide" id="slide-5" data-slide="4" aria-hidden="true" hidden>
+      <div class="slide-frame flowers-frame">
+        <div class="flowers-heading reveal" data-reveal data-reveal-order="0">
+          <p class="tiny-kicker">porque mereces todo lo bonito</p>
+          <h2 class="hand-title">Te mereces flores en tu día especial</h2>
+        </div>
+        <div class="flowers-layout">
+          <div class="message-column left-messages">
+            <article class="love-note reveal" data-reveal data-reveal-order="1"><span>♥</span><p>Tu sonrisa es de mis lugares favoritos.</p></article>
+            <article class="love-note reveal" data-reveal data-reveal-order="2"><span>♥</span><p>Qué bonito es coincidir contigo.</p></article>
+            <article class="love-note reveal" data-reveal data-reveal-order="3"><span>♥</span><p>Gracias por hacer especial lo cotidiano.</p></article>
+          </div>
+
+          <div class="flower-character reveal" data-reveal data-reveal-order="7">
+            <div class="bouquet-glow" aria-hidden="true"></div>
+            <img class="snoopy-rose" src="images/snoopy-rosa.png" alt="Snoopy sosteniendo una rosa roja">
+            <svg class="rose-bouquet" viewBox="0 0 360 330" role="img" aria-label="Un gran ramo de rosas rojas con hojas verdes y papel rosa">
+              <defs>
+                <radialGradient id="roseRed" cx="35%" cy="30%"><stop offset="0" stop-color="#ff9a91"/><stop offset=".55" stop-color="#e94250"/><stop offset="1" stop-color="#a51d35"/></radialGradient>
+                <linearGradient id="wrapPaper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0e9"/><stop offset="1" stop-color="#eaa7ad"/></linearGradient>
+              </defs>
+              <g class="bouquet-leaves" fill="#658c62" stroke="#486f4e" stroke-width="2">
+                <path d="M174 226 Q65 142 42 81 Q109 103 174 226Z"/><path d="M176 224 Q94 100 116 47 Q166 93 176 224Z"/>
+                <path d="M184 220 Q189 91 244 47 Q254 133 184 220Z"/><path d="M188 225 Q291 102 331 111 Q290 188 188 225Z"/>
+                <path d="M180 230 Q49 192 29 150 Q104 151 180 230Z"/><path d="M190 227 Q291 173 337 196 Q258 243 190 227Z"/>
+              </g>
+              <g fill="none" stroke="#4c8055" stroke-width="5" stroke-linecap="round"><path d="M177 254 Q151 173 91 104"/><path d="M180 254 Q172 146 146 75"/><path d="M183 254 Q205 130 235 75"/><path d="M188 254 Q250 167 293 141"/><path d="M181 254 Q118 173 55 161"/></g>
+              <path d="M77 184 Q177 215 288 184 L244 318 Q185 338 122 316Z" fill="url(#wrapPaper)" stroke="#d88f9a" stroke-width="3"/>
+              <path d="M112 194 L177 319 L218 194" fill="#fff8f2" opacity=".7"/>
+              <path d="M167 265 Q182 245 198 265 Q181 289 167 265Z" fill="#c94a57"/>
+              <g class="rose-heads">
+                <g transform="translate(70 89)"><circle r="31" fill="url(#roseRed)"/><circle r="22" fill="#f45d67"/><path d="M-13 4 Q-19 -13 -4 -17 Q6 -28 18 -12 Q30 0 13 10 Q4 23 -10 15Z" fill="#bd263e"/><circle r="6" fill="#8f1731"/></g>
+                <g transform="translate(143 59)"><circle r="34" fill="url(#roseRed)"/><circle r="24" fill="#ef5360"/><path d="M-17 5 Q-19 -13 -2 -20 Q9 -27 19 -10 Q29 5 10 13 Q-1 28 -17 5Z" fill="#b51e39"/><circle r="7" fill="#8e1730"/></g>
+                <g transform="translate(237 63)"><circle r="34" fill="url(#roseRed)"/><circle r="24" fill="#f45a66"/><path d="M-16 7 Q-20 -10 -4 -19 Q9 -29 18 -10 Q28 5 10 14 Q-1 27 -16 7Z" fill="#b51e39"/><circle r="7" fill="#8e1730"/></g>
+                <g transform="translate(305 113)"><circle r="30" fill="url(#roseRed)"/><circle r="21" fill="#f35b64"/><path d="M-13 4 Q-18 -13 -2 -18 Q10 -27 17 -9 Q26 6 9 12 Q-1 22 -13 4Z" fill="#b51e39"/><circle r="6" fill="#8e1730"/></g>
+                <g transform="translate(99 157)"><circle r="28" fill="url(#roseRed)"/><circle r="20" fill="#f45d67"/><path d="M-12 4 Q-17 -10 -2 -16 Q8 -24 16 -8 Q23 4 8 11 Q-2 22 -12 4Z" fill="#b51e39"/><circle r="6" fill="#8e1730"/></g>
+                <g transform="translate(264 161)"><circle r="28" fill="url(#roseRed)"/><circle r="20" fill="#f45d67"/><path d="M-12 4 Q-17 -10 -2 -16 Q8 -24 16 -8 Q23 4 8 11 Q-2 22 -12 4Z" fill="#b51e39"/><circle r="6" fill="#8e1730"/></g>
+              </g>
+              <path d="M160 253 Q179 237 202 254 L220 268 Q195 279 181 297 Q166 278 143 269Z" fill="#d84b5a" stroke="#aa3147" stroke-width="2"/>
+              <path d="M180 266 Q145 246 137 269 Q150 290 180 276 Q207 297 224 269 Q215 246 180 266Z" fill="#f27a85" stroke="#b94458" stroke-width="2"/>
+            </svg>
+            <span class="flower-heart flower-heart-one" aria-hidden="true">♥</span>
+            <span class="flower-heart flower-heart-two" aria-hidden="true">♥</span>
+          </div>
+
+          <div class="message-column right-messages">
+            <article class="love-note reveal" data-reveal data-reveal-order="4"><span>♥</span><p>Admiro la persona tan maravillosa que eres.</p></article>
+            <article class="love-note reveal" data-reveal data-reveal-order="5"><span>♥</span><p>Te elegiría una y mil veces.</p></article>
+            <article class="love-note reveal" data-reveal data-reveal-order="6"><span>♥</span><p>Deseo que la vida te regale tanta alegría como tú das.</p></article>
+          </div>
+        </div>
+        <p class="flowers-footer reveal" data-reveal data-reveal-order="8">Hoy y siempre, que nunca te falten flores ni motivos para sonreír. ♡</p>
+      </div>
+    </section>
+
+    <!-- PANTALLA 6: VELITAS -->
+    <section class="slide" id="slide-6" data-slide="5" aria-hidden="true" hidden>
+      <div class="slide-frame candle-frame">
+        <div class="candle-heading reveal" data-reveal>
+          <p class="tiny-kicker">pide un deseo muy bonito</p>
+          <h2 class="hand-title">Sopla la vela mi amor!!</h2>
+        </div>
+        <div class="birthday-scene">
+          <div class="birthday-sparkle sparkle-a" aria-hidden="true">✦</div>
+          <div class="birthday-sparkle sparkle-b" aria-hidden="true">♥</div>
+          <button class="birthday-cake reveal" data-reveal id="birthdayCake" type="button" aria-label="Apagar las velitas del pastel">
+            <img class="snoopy-with-cake" data-art="cake" src="https://files.coloringpark.com/snoopy-coloring-pages/snoopy-with-a-birthday-cake-coloring-page-800.webp" alt="Snoopy sosteniendo un pastel de cumpleaños con tres velitas">
+            <span class="cake-candle candle-one"><i class="flame"></i><i class="smoke"></i></span>
+            <span class="cake-candle candle-two"><i class="flame"></i><i class="smoke"></i></span>
+            <span class="cake-candle candle-three"><i class="flame"></i><i class="smoke"></i></span>
+          </button>
+        </div>
+        <div class="candle-actions reveal" data-reveal>
+          <button class="pink-button blow-button" id="blowCandlesBtn" type="button">Apagar las velitas</button>
+          <p class="blow-instruction">También puedes tocar el pastel para pedir tu deseo.</p>
+        </div>
+        <div class="birthday-wish" id="birthdayWish" aria-live="polite" hidden>
+          <p class="hand-title">¡Que todos tus deseos se hagan realidad!</p>
+          <p>Hoy celebramos lo maravillosa que eres. Te mereces un día lleno de amor.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA 7: CARTA FINAL -->
+    <section class="slide" id="slide-7" data-slide="6" aria-hidden="true" hidden>
+      <div class="slide-frame letter-frame">
+        <div class="letter-heading reveal" data-reveal>
+          <p class="tiny-kicker">con todo mi corazón</p>
+          <h2 class="hand-title" id="finalTitle">Feliz cumpleaños</h2>
+          <p class="letter-subtitle" id="finalSubtitle">mi bella novia</p>
+        </div>
+        <article class="birthday-letter reveal" data-reveal id="birthdayLetter">
+          <div class="letter-hearts reveal" data-reveal aria-hidden="true"><span>♥</span><span>♥</span><span>♡</span></div>
+          <div class="letter-inner">
+            <p class="letter-greeting reveal" data-reveal id="letterGreeting">Mi amor:</p>
+            <p class="letter-closing reveal" data-reveal id="letterClosing">Te amo muchísimo. Feliz cumpleaños, mi vida. ♡</p>
+            <p class="letter-signature reveal" data-reveal id="letterSignature">Con amor, siempre.</p>
+          </div>
+          <img class="letter-snoopy reveal" data-reveal src="https://pngimg.com/uploads/snoopy/snoopy_PNG24.png" alt="Snoopy abrazando un corazón rojo" onerror="this.onerror=null;this.src='https://assets.stickpng.com/images/5853c4adec0c270fc2f62df9.png'">
+        </article>
+        <p class="final-footnote reveal" data-reveal>Esta cartita es solo una pequeña forma de decirte cuánto te quiero.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Navegación común: el contenido de las demás pantallas permanece oculto -->
+  <nav class="presentation-nav" aria-label="Navegación entre sorpresas">
+    <button class="nav-button nav-back" id="prevBtn" type="button" disabled><span aria-hidden="true">♡</span> Anterior</button>
+    <div class="progress-area">
+      <div class="progress-dots" id="progressDots" aria-label="Progreso de la presentación">
+        <button class="progress-dot is-current" type="button" aria-label="Pantalla 1" data-go="0"></button>
+        <button class="progress-dot" type="button" aria-label="Pantalla 2" data-go="1"></button>
+        <button class="progress-dot" type="button" aria-label="Pantalla 3" data-go="2"></button>
+        <button class="progress-dot" type="button" aria-label="Pantalla 4" data-go="3"></button>
+        <button class="progress-dot" type="button" aria-label="Pantalla 5" data-go="4"></button>
+        <button class="progress-dot" type="button" aria-label="Pantalla 6" data-go="5"></button>
+        <button class="progress-dot" type="button" aria-label="Pantalla 7" data-go="6"></button>
+      </div>
+      <span class="step-count" id="stepCount">1 / 7</span>
+    </div>
+    <button class="nav-button nav-next" id="nextBtn" type="button">Siguiente <span aria-hidden="true">♡</span></button>
+  </nav>
+
+  <div class="gift-modal" id="giftModal" hidden role="dialog" aria-modal="true" aria-label="Sorpresa">
+    <button class="gift-close" id="giftClose" type="button" aria-label="Cerrar">✕</button>
+    <div class="gift-body" id="giftBody"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
