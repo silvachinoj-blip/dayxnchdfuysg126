@@ -1,0 +1,8 @@
+Guarda aquí tus archivos:
+
+  experiencia-religiosa.mp3  -> la canción que suena en el reproductor de la pantalla 2
+  dayana.jpg   -> la foto de portada de esa canción
+  day11.jpg, dayis2.jpg, day6_1.jpg, day1.jpg, day7.jpg, day9.jpg -> fotos de la galería de recuerdos
+  cancion.mp3  -> el regalo "Una canción" (Woodstock); solo suena
+
+Si usas otros nombres, cambia las rutas en CONFIG (script.js): songPlayer y giftSong.
